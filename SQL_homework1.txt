@@ -1,0 +1,74 @@
+CREATE TABLE cars
+(
+  gosregznak VARCHAR(12) PRIMARY KEY,
+  brand VARCHAR(30),
+  carOwner VARCHAR(30)
+);
+CREATE TABLE service
+(
+  serviceNumber VARCHAR(3) PRIMARY key,
+  carName VARCHAR(30),
+  workCategorynumber INT,
+  readyDate DATE,
+  employee INT 
+ );
+ CREATE TABLE employees
+(
+  employeeNumber INT PRIMARY KEY,
+  phoneNumber VARCHAR(10),
+  address VARCHAR(100),
+  fullName VARCHAR(50)
+  );
+  CREATE TABLE workCategory
+(
+  workCode INT primary KEY,
+  workName VARCHAR(30),
+  workDescription VARCHAR(100),
+  workPrice money
+ );
+ 
+ alter TABLE service 
+add CONSTRAINT fk_cars
+FOREIGN KEY(carname)
+REFERENCES cars(gosregznak);
+ 
+alter TABLE service
+add CONSTRAINT fk_service
+FOREIGN KEY(workcategorynumber)
+REFERENCES workcategory(workcode);
+ 
+alter TABLE service
+add CONSTRAINT fk_service2
+FOREIGN KEY(employee)
+REFERENCES employees(employeeNumber);
+   
+INSERT INTO cars(gosregznak,brand,carOwner)
+VALUES ('А111БВ123RUS', 'Жигули', 'Петров П.П.');
+INSERT INTO cars(gosregznak,brand,carOwner)
+VALUES ('Д111ЕЖ456RUS', 'Таврия', 'Сидоров С.С.');
+INSERT INTO cars(gosregznak,brand,carOwner)
+VALUES ('З111ИК789RUS', 'Запорожец', 'Иванов И.И.');
+ 
+INSERT INTO employees(employeenumber,phonenumber,address,fullname)
+VALUES ('21', '9888888888', 'Адрес 1', 'Катин К.К.');
+INSERT INTO employees(employeenumber,phonenumber,address,fullname)
+VALUES ('34', '9777777777', 'Адрес 2', 'Машин М.М.');
+ 
+INSERT INTO workcategory(workcode,workname,workdescription,workprice)
+VALUES (1, 'Ходовая', 'Замена железяк в ходовой', 730.25);
+INSERT INTO workcategory(workcode,workname,workdescription,workprice)
+VALUES (2, 'Подвеска', 'Замена железяк в подвеске', 67513.97);
+INSERT INTO workcategory(workcode,workname,workdescription,workprice)
+VALUES (3, 'Двигатель', 'Замена двигателя', 500000);
+
+INSERT INTO service(serviceNumber,carName,workCategorynumber,readyDate,employee)
+VALUES ('2', 'А111БВ123RUS', 1, '04.04.2023', 21);
+INSERT INTO service(serviceNumber,carName,workCategorynumber,readyDate,employee)
+VALUES ('3', 'Д111ЕЖ456RUS', 2, '05.05.2024', 34);
+INSERT INTO service(serviceNumber,carName,workCategorynumber,readyDate,employee)
+VALUES ('4', 'Д111ЕЖ456RUS', 3, '06.06.2024', 21);
+
+ SELECT * from cars;
+ SELECT * from service;
+ SELECT * from employees;
+ SELECT * from workcategory;
